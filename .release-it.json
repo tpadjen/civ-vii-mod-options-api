@@ -1,0 +1,25 @@
+{
+  "$schema": "https://unpkg.com/release-it/schema/release-it.json",
+  "github": {
+    "release": true
+  },
+  "npm": {
+    "release": false,
+    "publish": false
+  },
+  "git": {
+    "requireBranch": "main"
+  },
+  "hooks": {
+    "after:bump": "npx auto-changelog"
+  },
+  "plugins": {
+    "@j-ulrich/release-it-regex-bumper": {
+      "out": {
+        "file": "ChooseStartingLayers.modinfo",
+        "search": "tbq_choose_starting_layers\" version=\"{{semver}}\"",
+        "replace": "tbq_choose_starting_layers\" version=\"{{versionWithoutPrerelease}}\""
+      }
+    }
+  }
+}

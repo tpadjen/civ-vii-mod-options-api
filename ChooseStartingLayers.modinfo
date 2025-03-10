@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="tbq_choose_starting_layers" version="0.0.0"
+    xmlns="ModInfo">
+    <Properties>
+        <Name>Choose Starting Layers</Name>
+        <Description>Adds user settings to allow a choice of layers (hexgrid and/or tile yields) that should be enabled when the game loads.</Description>
+        <Authors>TBQ</Authors>
+        <Package>Mod</Package>
+        <AffectsSavedGames>0</AffectsSavedGames>
+    </Properties>
+    <ActionCriteria>
+        <Criteria id="always">
+            <AlwaysMet></AlwaysMet>
+        </Criteria>
+    </ActionCriteria>
+    <ActionGroups>
+         <ActionGroup id="tbq_choose_starting_layers_shell" scope="shell" criteria="always">
+            <Actions>
+                <UpdateText>
+					<Item>/text/localization.sql</Item>
+				</UpdateText>
+                <UIScripts>
+                    <Item>/mod/init.js</Item>
+                </UIScripts>
+                <ImportFiles>
+                    <Item>/mod/options/options-helpers.js</Item>
+                    <Item>/mod/options/options.js</Item>
+                    <Item>/mod/options/storage.js</Item>
+                </ImportFiles>
+            </Actions>
+        </ActionGroup>
+        <ActionGroup id="tbq_choose_starting_layers_game" scope="game" criteria="always">
+            <Actions>
+                <UpdateText>
+					<Item>/text/localization.sql</Item>
+				</UpdateText>
+                <UIScripts>
+                    <Item>/mod/inits.js</Item>
+                </UIScripts>
+                <ImportFiles>
+                    <Item>/mod/options/options-helpers.js</Item>
+                    <Item>/mod/options/options.js</Item>
+                    <Item>/mod/options/storage.js</Item>
+                    <Item>/base-standard/ui/lenses/layer/lens/default-lens.js</Item>
+                    <Item>/base-standard/ui/lenses/layer/hexgrid-layer.js</Item>
+                </ImportFiles>
+            </Actions>
+        </ActionGroup>
+    </ActionGroups>
+</Mod>
+
