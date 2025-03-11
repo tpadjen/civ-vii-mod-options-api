@@ -1,6 +1,6 @@
-# Choose Starting Layers
+# Options API
 
-A Civ VII mod that adds options to the game settings menu to choose to show or hide the hexgrid and/or tile yields when the game loads.
+A Civ VII mod that adds functionality to the built in Options model to make adding settings options for other mods easier.
 
 ## Installation Instructions
 1. You can download the latest stable release at [Civfanatics](https://forums.civfanatics.com/resources/[TODO - placeholder]/)

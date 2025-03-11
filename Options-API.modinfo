@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="tbq_options_api" version="0.0.0"
+    xmlns="ModInfo">
+    <Properties>
+        <Name>Options API</Name>
+        <Description>Simplifies adding settings to the game options for mods.</Description>
+        <Authors>TBQ</Authors>
+        <Package>Mod</Package>
+        <AffectsSavedGames>0</AffectsSavedGames>
+    </Properties>
+    <ActionCriteria>
+        <Criteria id="always">
+            <AlwaysMet></AlwaysMet>
+        </Criteria>
+    </ActionCriteria>
+    <ActionGroups>
+        <ActionGroup id="tbq_options_api_shell" scope="shell" criteria="always">
+            <Properties>
+				<LoadOrder>10</LoadOrder>
+			</Properties>
+            <Actions>
+                <UIScripts>
+                    <Item>mod/options-api/extend-options.js</Item>
+                </UIScripts>
+                <ImportFiles>
+                    <Item>mod/options-api/mod-options-store.js</Item>
+                </ImportFiles>
+            </Actions>
+        </ActionGroup>
+        <ActionGroup id="tbq_options_api_game" scope="game" criteria="always">
+            <Properties>
+				<LoadOrder>10</LoadOrder>
+			</Properties>
+            <Actions>
+                <UIScripts>
+                    <Item>mod/options-api/extend-options.js</Item>
+                </UIScripts>
+                <ImportFiles>
+                    <Item>mod/options-api/mod-options-store.js</Item>
+                </ImportFiles>
+            </Actions>
+        </ActionGroup>
+    </ActionGroups>
+</Mod>
+
