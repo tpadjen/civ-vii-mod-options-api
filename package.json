@@ -1,17 +1,17 @@
 {
-  "name": "tbqs-choose-starting-layers",
+  "name": "tbq-mod-options-api",
   "version": "0.2.0",
   "description": "A mod to improve the Resources screen in Civ VII.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tpadjen/civ-vii-choose-starting-layers.git"
+    "url": "git+https://github.com/tpadjen/civ-vii-mod-options-api.git"
   },
   "author": "Tim Padjen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tpadjen/civ-vii-choose-starting-layers/issues"
+    "url": "https://github.com/tpadjen/civ-vii-mod-options-api/issues"
   },
-  "homepage": "https://github.com/tpadjen/civ-vii-choose-starting-layers#readme",
+  "homepage": "https://github.com/tpadjen/civ-vii-mod-options-api#readme",
   "scripts": {
     "release": "release-it"
   },

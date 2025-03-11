@@ -16,9 +16,9 @@
   "plugins": {
     "@j-ulrich/release-it-regex-bumper": {
       "out": {
-        "file": "ChooseStartingLayers.modinfo",
-        "search": "tbq_choose_starting_layers\" version=\"{{semver}}\"",
-        "replace": "tbq_choose_starting_layers\" version=\"{{versionWithoutPrerelease}}\""
+        "file": "Options-API.modinfo",
+        "search": "tbq_options_api\" version=\"{{semver}}\"",
+        "replace": "tbq_options_api\" version=\"{{versionWithoutPrerelease}}\""
       }
     }
   }
