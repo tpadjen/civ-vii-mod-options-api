@@ -28,8 +28,8 @@ import { CategoryType } from '/core/ui/options/options-helpers.js';
 // Add a dependency on the Options module to ensure standard game options are loaded before the mod's
 import '/core/ui/options/options.js';
 
-// must be unique for your mod to prevent conflicts
-const MOD_NAMESPACE = 'change-me';
+// namespace must be unique for your mod to prevent conflicts
+Options.setupModOptions({ namespace: 'tbq-csl' });
 
 // the name of the settings group to put this in, matched to a localization key
 const MOD_OPTIONS_GROUP = 'snake_case_name_to_match_loc_group';
@@ -48,7 +48,6 @@ const MOD_OPTIONS_GROUP = 'snake_case_name_to_match_loc_group';
 //   * addChangeListener((value) => void) - listen for changes to the value
 export const myFirstOption = Options.addModOption({
     id: 'my-first-option',        // internal use, unique within your namespace
-    namespace: MOD_NAMESPACE,     // needs to be unique across all mods
     category: CategoryType.Game,  // which tab should it show up in?
     group: MOD_OPTIONS_GROUP,     // which group should it be in?
     type: OptionType.Checkbox,    // what type of option is it (API only tested with checkbox for now)
