@@ -6,6 +6,7 @@
         <Description>Simplifies adding settings to the game options for mods.</Description>
         <Authors>TBQ</Authors>
         <Package>Mod</Package>
+        <Version>0.1.0</Version>
         <AffectsSavedGames>0</AffectsSavedGames>
     </Properties>
     <ActionCriteria>
