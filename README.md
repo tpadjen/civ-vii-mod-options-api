@@ -1,6 +1,6 @@
 # Options API
 
-A Civ VII mod that adds functionality to the built in Options model to make adding settings options for other mods easier.
+A Civ VII api that add functionality to the built in Options model to make adding settings options for other mods easier.
 
 ## Installation Instructions
 1. You can download the latest stable release from this repo's releases)
@@ -10,15 +10,24 @@ A Civ VII mod that adds functionality to the built in Options model to make addi
     * Steam Deck\Linux: `~/My Games/Sid Meier's Civilization VII/Mods/`
 
 ## Usage
-1. Install this mod alongside yours
-2. Add a dependency to your `.modinfo`
+1. Copy the api folder into your mod
+2. Load the api before your mod using `ActionGroups` and `LoadOrder`.
+Add the `ActionGroup` tags to your `.modinfo` from `ActionGroups.xml`
 ```
-...
-</Properties>
-<Dependencies>
-    <Mod id="tbq_options_api" title="options-api" />
-</Dependencies>
-...
+<ActionGroups>
+    // the two groups go here
+    // one is for the shell (main menu)
+    // the other is for in-game.
+    ...then your mod's action groups
+</ActionGroups>
+```
+Add a `LoadOrder` to each of your existing `ActionGroups`, and change the number to be higher than the api's
+```
+<ActionGroup id="my_mod_id" scope="game" criteria="always">
+    <Properties>
+        <LoadOrder>20</LoadOrder>
+    </Properties>
+    etc...
 ```
 3. Create a new js, as an ImportFile (so it can export to other ImportFiles), example `mod-options.js`
 ```
