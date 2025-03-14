@@ -10,20 +10,18 @@ A Civ VII api that add functionality to the built in Options model to make addin
     * Steam Deck\Linux: `~/My Games/Sid Meier's Civilization VII/Mods/`
 
 ## Usage
-1. Copy the api folder into your mod
+1. Copy the file `[mod-id]-options-api.js` from the api folder to anywhere in your mod.
+2. Rename `[mod-id]-options-api.js` by replacing `[mod-id]` with a unique id for your mod.
 2. Add the files to your `modinfo` as `ImportFiles`
 ```
 // inside an Action
 <ImportFiles>
-    <Item>api/options/extend-options.js</Item>
-    <Item>api/options/options-store.js</Item>
-    <Item>api/storage/json-store.js</Item>
-    // more mod files ...
+    <Item>path/to/your-id-options-api.js</Item>
 </ImportFiles>
 ```
-3. Create a new js, as an ImportFile (so it can export to other ImportFiles), example `mod-options.js`
+3. Create a new js, as an ImportFile (so it can export to other ImportFiles), example `your-id-mod-options.js`
 ```
-import { extendOptions } from '/api/options/extend-options.js';
+import { setupModOptions } from '/path/to/your-id-options-api.js';
 import { Options, OptionType } from "/core/ui/options/model-options.js";
 import { CategoryType } from '/core/ui/options/options-helpers.js';
 
@@ -31,7 +29,7 @@ import { CategoryType } from '/core/ui/options/options-helpers.js';
 import '/core/ui/options/options.js';
 
 // namespace must be unique for your mod to prevent conflicts
-extendOptions({ namespace: 'tbq-csl' });
+const ModOptions = setupModOptions({ namespace: 'tbq-csl' });
 
 // the name of the settings group to put this in, matched to a localization key
 const MOD_OPTIONS_GROUP = 'snake_case_name_to_match_loc_group';
@@ -48,7 +46,7 @@ const MOD_OPTIONS_GROUP = 'snake_case_name_to_match_loc_group';
 // It returns an object with all of these properties, plus
 //   * value - the current value of option
 //   * addChangeListener((value) => void) - listen for changes to the value
-export const myFirstOption = Options.addModOption({
+export const myFirstOption = ModOptions.addModOption({
     id: 'my-first-option',        // internal use, unique within your namespace
     category: CategoryType.Mods,  // which tab should it show up in (Mods recommended)?
     group: MOD_OPTIONS_GROUP,     // which group should it be in?
