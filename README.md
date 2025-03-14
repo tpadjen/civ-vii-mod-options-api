@@ -11,34 +11,27 @@ A Civ VII api that add functionality to the built in Options model to make addin
 
 ## Usage
 1. Copy the api folder into your mod
-2. Load the api before your mod using `ActionGroups` and `LoadOrder`.
-Add the `ActionGroup` tags to your `.modinfo` from `ActionGroups.xml`
+2. Add the files to your `modinfo` as `ImportFiles`
 ```
-<ActionGroups>
-    // the two groups go here
-    // one is for the shell (main menu)
-    // the other is for in-game.
-    ...then your mod's action groups
-</ActionGroups>
-```
-Add a `LoadOrder` to each of your existing `ActionGroups`, and change the number to be higher than the api's
-```
-<ActionGroup id="my_mod_id" scope="game" criteria="always">
-    <Properties>
-        <LoadOrder>20</LoadOrder>
-    </Properties>
-    etc...
+// inside an Action
+<ImportFiles>
+    <Item>api/options/extend-options.js</Item>
+    <Item>api/options/options-store.js</Item>
+    <Item>api/storage/json-store.js</Item>
+    // more mod files ...
+</ImportFiles>
 ```
 3. Create a new js, as an ImportFile (so it can export to other ImportFiles), example `mod-options.js`
 ```
+import { extendOptions } from '/api/options/extend-options.js';
 import { Options, OptionType } from "/core/ui/options/model-options.js";
 import { CategoryType } from '/core/ui/options/options-helpers.js';
 
-// Add a dependency on the Options module to ensure standard game options are loaded before the mod's
+// needs to load before adding new options to Mods category
 import '/core/ui/options/options.js';
 
 // namespace must be unique for your mod to prevent conflicts
-Options.setupModOptions({ namespace: 'tbq-csl' });
+extendOptions({ namespace: 'tbq-csl' });
 
 // the name of the settings group to put this in, matched to a localization key
 const MOD_OPTIONS_GROUP = 'snake_case_name_to_match_loc_group';
@@ -57,7 +50,7 @@ const MOD_OPTIONS_GROUP = 'snake_case_name_to_match_loc_group';
 //   * addChangeListener((value) => void) - listen for changes to the value
 export const myFirstOption = Options.addModOption({
     id: 'my-first-option',        // internal use, unique within your namespace
-    category: CategoryType.Game,  // which tab should it show up in?
+    category: CategoryType.Mods,  // which tab should it show up in (Mods recommended)?
     group: MOD_OPTIONS_GROUP,     // which group should it be in?
     type: OptionType.Checkbox,    // what type of option is it (API only tested with checkbox for now)
     defaultValue: true,           // what should the initial value be?

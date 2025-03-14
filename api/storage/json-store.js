@@ -7,6 +7,17 @@ export class JSONStore {
     }
 
     setItem(key, value) {
+        if (localStorage.length > 1) {
+            console.warn(`Invalid localStorage: Found (${localStorage.length} keys, only 1 allowed)`);
+            const invalidKeys = (Object.keys(localStorage) ?? [])
+                                    .filter(key => key !== JSONStore.#LOCAL_STORAGE_KEY);
+            if (invalidKeys.length > 0) console.warn('Invalid keys: ', JSON.stringify(invalidKeys));
+            console.warn(`Mods should only write data to "${JSONStore.#LOCAL_STORAGE_KEY}"`);
+            console.warn('Clearing all localStorage data to allow continued usage');
+
+            localStorage.clear();
+        }
+
         const store = this.#readStore();
         const namespaceStore = store[this.namespace] ?? {}; 
         const updated = {
