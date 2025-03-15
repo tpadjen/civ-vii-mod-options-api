@@ -1,4 +1,4 @@
-import { Options } from "/core/ui/options/model-options.js";
+import { Options, OptionType } from "/core/ui/options/model-options.js";
 import { CategoryData, CategoryType } from '/core/ui/options/options-helpers.js';
 
 export class JSONStore {
@@ -65,6 +65,7 @@ export class OptionsStore {
     addOption(option) {
         this.option = this.options.push(option);
         this.#setDefaultIfMissing(option);
+
         option.value = this.load(option);
     }
 
@@ -180,12 +181,37 @@ export function setupModOptions({ namespace, settingsKey }) {
         const newOption = {
             ...modOption,
             initListener(optionInfo) {
+                
                 optionInfo.currentValue = this.value;
                 this.updatedValue = this.value;
+                if (optionInfo.type == OptionType.Dropdown){
+                    for (let index = 0; index < optionInfo.dropdownItems.length; ++index) {
+                        if (optionInfo.dropdownItems[index].value == this.value) {
+                            optionInfo.selectedItemIndex = index;
+                            break;
+                        }
+                    }
+                    optionInfo.currentValue = optionInfo.originalValue = this.value;
+                }
             },
             updateListener(optionInfo, value) {
-                optionInfo.currentValue = value;
-                this.updatedValue = optionInfo.currentValue;
+                if (optionInfo.type == OptionType.Dropdown){
+                    const newValue = optionInfo.dropdownItems[value].value;
+                    optionInfo.currentValue = newValue;
+                    this.updatedValue = newValue;
+                    if (optionInfo.currentValue != optionInfo.originalValue) {
+                        Options.needReloadRefCount += 1;
+                    }
+                    else {
+                        if (Options.needReloadRefCount > 0) {
+                            Options.needReloadRefCount -= 1;
+                        }
+                    }
+                } else {
+                    optionInfo.currentValue = value;
+                    this.updatedValue = optionInfo.currentValue;
+                }
+                
             },
             _changeListeners: [],
             addChangeListener(callback) {
@@ -204,6 +230,7 @@ export function setupModOptions({ namespace, settingsKey }) {
 
         return newOption;
     }
+
 
     return {
         addModOption
